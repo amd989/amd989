@@ -24,42 +24,12 @@ Most of what I build is software for hardware I own: my multimeter, my 3D printe
 
 ### Where my code runs
 
-The blue boxes are my projects. Everything else is the hardware or service they talk to.
-
-```mermaid
-flowchart LR
-  subgraph house["Around the house"]
-    direction LR
-    suitchi["Suitchi wall switch"] --> ha["Home Assistant"]
-    suitchi --> homekit["HomeKit"]
-    dengen["Dengen"] -- ATX power --> nuc["Intel NUC"]
-    flipper["Flipper Zero"] -- infrared --> infrafi["InfraFi"] --> server["Linux server"]
-  end
-
-  subgraph closet["Network closet"]
-    direction LR
-    opn["OPNsense"] --> ug["unifi-gateway"] --> unifi["UniFi controller"]
-    opn --> wfo["widgets-for-opnsense"] --> desk["Windows, KDE and GNOME widgets"]
-  end
-
-  subgraph print["Print corner"]
-    direction LR
-    mariner["mariner on a Raspberry Pi"] -- USB --> mars["Elegoo Mars 3"]
-    klipper["Klipper printer"] --> kc["klipper-connect"] --> prusa["Prusa Connect"]
-    cams["RTSP cameras"] --> spc["scrypted-prusa-connect"] --> prusa
-  end
-
-  subgraph bench["On the bench"]
-    direction LR
-    meter["EEVblog 121GW multimeter"] -- Bluetooth LE --> readout["Readout"]
-    readout -- MCP --> claude["Claude"]
-  end
-
-  classDef mine fill:#1f6feb,stroke:#1f6feb,color:#ffffff
-  class readout,mariner,kc,spc,ug,wfo,suitchi,dengen,infrafi mine
-```
-
-Repos in the map: [Readout](https://github.com/amd989/readout) · [mariner](https://github.com/mariner3d/mariner) · [klipper-connect](https://github.com/amd989/klipper-connect) · [scrypted-prusa-connect](https://github.com/amd989/scrypted-prusa-connect) · [unifi-gateway](https://github.com/amd989/unifi-gateway) · [widgets-for-opnsense](https://github.com/amd989/widgets-for-opnsense) · [Suitchi](https://github.com/amd989/Suitchi) · [Dengen](https://github.com/amd989/Dengen) · [InfraFi](https://github.com/amd989/InfraFi)
+| | Hardware | My code |
+|---|---|---|
+| On the bench | EEVblog 121GW multimeter | [Readout](https://github.com/amd989/readout) |
+| Print corner | Elegoo Mars 3, Klipper printers, RTSP cameras | [mariner](https://github.com/mariner3d/mariner), [klipper-connect](https://github.com/amd989/klipper-connect), [scrypted-prusa-connect](https://github.com/amd989/scrypted-prusa-connect) |
+| Network closet | OPNsense firewall | [unifi-gateway](https://github.com/amd989/unifi-gateway), [widgets-for-opnsense](https://github.com/amd989/widgets-for-opnsense) |
+| Around the house | Wall switches, Intel NUC, Flipper Zero | [Suitchi](https://github.com/amd989/Suitchi), [Dengen](https://github.com/amd989/Dengen), [InfraFi](https://github.com/amd989/InfraFi) |
 
 ### Elsewhere on GitHub
 
