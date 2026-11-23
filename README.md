@@ -7,9 +7,9 @@
 </a>
 
 <a href="https://alejandro.md"><img src="https://img.shields.io/badge/website-alejandro.md-58A6FF?style=flat-square&logo=googlechrome&logoColor=white" alt="Website" /></a>
+<a href="https://blog.alejandro.md"><img src="https://img.shields.io/badge/blog-The_Maker_Shed-21759B?style=flat-square&logo=wordpress&logoColor=white" alt="Blog" /></a>
 <a href="https://linktree.alejandro.md"><img src="https://img.shields.io/badge/linktree-alejandro.md-39E09B?style=flat-square&logo=linktree&logoColor=white" alt="Linktree" /></a>
 <a href="https://github.com/amd989?tab=followers"><img src="https://img.shields.io/github/followers/amd989?style=flat-square&logo=github&label=followers&color=24292e" alt="GitHub followers" /></a>
-<a href="https://github.com/amd989/Symlinker"><img src="https://img.shields.io/github/stars/amd989/Symlinker?style=flat-square&logo=github&label=Symlinker%20stars&color=f5c518" alt="Symlinker stars" /></a>
 
 </div>
 
@@ -22,64 +22,61 @@ Most of what I build is software for hardware I own: my multimeter, my 3D printe
 - My homelab runs OPNsense, Home Assistant, Klipper and a lot of Docker containers
 - Recently I've been adding MCP servers so AI assistants can talk to that hardware
 
-### Featured projects
+### Where my code runs
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h4><a href="https://github.com/amd989/readout">Readout</a></h4>
-      A companion app for the EEVblog 121GW multimeter on iPhone, iPad, Mac, Android and Windows. It draws the meter's LCD, presses its buttons remotely, logs and graphs readings, exports CSV, and includes an MCP server so Claude can read the meter.
-      <br/><br/>
-      <img src="https://img.shields.io/badge/.NET_MAUI-512BD4?style=flat-square&logo=dotnet&logoColor=white" />
-      <img src="https://img.shields.io/badge/Bluetooth_LE-0082FC?style=flat-square&logo=bluetooth&logoColor=white" />
-      <img src="https://img.shields.io/badge/MCP-D97757?style=flat-square&logo=anthropic&logoColor=white" />
-    </td>
-    <td width="50%" valign="top">
-      <h4><a href="https://github.com/amd989/Symlinker">Symlinker</a></h4>
-      A GUI for Windows' <code>mklink</code>, so you can make symbolic links, hard links and junctions without the command line. It's my most popular project.
-      <br/><br/>
-      <img src="https://img.shields.io/github/stars/amd989/Symlinker?style=flat-square&color=f5c518" />
-      <img src="https://img.shields.io/github/forks/amd989/Symlinker?style=flat-square" />
-      <img src="https://img.shields.io/badge/C%23-239120?style=flat-square&logo=dotnet&logoColor=white" />
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h4><a href="https://github.com/amd989/unifi-gateway">unifi-gateway</a></h4>
-      Pretends to be a UniFi Security Gateway, so a third-party router running OPNsense, pfSense or OpenWrt shows up in the UniFi controller with its stats.
-      <br/><br/>
-      <img src="https://img.shields.io/github/stars/amd989/unifi-gateway?style=flat-square&color=f5c518" />
-      <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" />
-      <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" />
-    </td>
-    <td width="50%" valign="top">
-      <h4><a href="https://github.com/amd989/InfraFi">InfraFi</a></h4>
-      Sends WiFi credentials from a Flipper Zero to a Linux server over infrared. Point, send, connected.
-      <br/><br/>
-      <img src="https://img.shields.io/github/stars/amd989/InfraFi?style=flat-square&color=f5c518" />
-      <img src="https://img.shields.io/badge/Flipper_Zero-FF8200?style=flat-square&logoColor=white" />
-      <img src="https://img.shields.io/badge/C-A8B9CC?style=flat-square&logo=c&logoColor=black" />
-    </td>
-  </tr>
-</table>
+The blue boxes are my projects. Everything else is the hardware or service they talk to.
 
-### Other projects
+```mermaid
+flowchart LR
+  subgraph house["Around the house"]
+    direction LR
+    suitchi["Suitchi wall switch"] --> ha["Home Assistant"]
+    suitchi --> homekit["HomeKit"]
+    dengen["Dengen"] -- ATX power --> nuc["Intel NUC"]
+    flipper["Flipper Zero"] -- infrared --> infrafi["InfraFi"] --> server["Linux server"]
+  end
 
-#### 3D printing
-- [klipper-connect](https://github.com/amd989/klipper-connect): a bridge that runs next to Moonraker and lets Klipper printers use Prusa Connect
-- [scrypted-prusa-connect](https://github.com/amd989/scrypted-prusa-connect): a Scrypted plugin that sends camera feeds to Prusa Connect
+  subgraph closet["Network closet"]
+    direction LR
+    opn["OPNsense"] --> ug["unifi-gateway"] --> unifi["UniFi controller"]
+    opn --> wfo["widgets-for-opnsense"] --> desk["Windows, KDE and GNOME widgets"]
+  end
 
-#### Homelab and networking
-- [widgets-for-opnsense](https://github.com/amd989/widgets-for-opnsense): Windows 11, KDE Plasma and GNOME widgets that show DHCP leases, traffic and firewall rules from OPNsense
-- [Suitchi](https://github.com/amd989/Suitchi): a cheap DIY smart wall switch that works with HomeKit and Home Assistant
+  subgraph print["Print corner"]
+    direction LR
+    mariner["mariner on a Raspberry Pi"] -- USB --> mars["Elegoo Mars 3"]
+    klipper["Klipper printer"] --> kc["klipper-connect"] --> prusa["Prusa Connect"]
+    cams["RTSP cameras"] --> spc["scrypted-prusa-connect"] --> prusa
+  end
 
-#### Hardware
-- [Dengen](https://github.com/amd989/Dengen): an Arduino controller for the ATX power supply in my Intel NUC build
+  subgraph bench["On the bench"]
+    direction LR
+    meter["EEVblog 121GW multimeter"] -- Bluetooth LE --> readout["Readout"]
+    readout -- MCP --> claude["Claude"]
+  end
 
-#### Everything else
-- [OutlookADOIntegration](https://github.com/amd989/OutlookADOIntegration): attach emails to Azure DevOps work items from Outlook
-- [iTunesLyrics](https://github.com/amd989/iTunesLyrics): adds lyrics to the songs in your library
-- [wordpress-theme-terminal](https://github.com/amd989/wordpress-theme-terminal): a simple retro WordPress theme
+  classDef mine fill:#1f6feb,stroke:#1f6feb,color:#ffffff
+  class readout,mariner,kc,spc,ug,wfo,suitchi,dengen,infrafi mine
+```
+
+Repos in the map: [Readout](https://github.com/amd989/readout) · [mariner](https://github.com/mariner3d/mariner) · [klipper-connect](https://github.com/amd989/klipper-connect) · [scrypted-prusa-connect](https://github.com/amd989/scrypted-prusa-connect) · [unifi-gateway](https://github.com/amd989/unifi-gateway) · [widgets-for-opnsense](https://github.com/amd989/widgets-for-opnsense) · [Suitchi](https://github.com/amd989/Suitchi) · [Dengen](https://github.com/amd989/Dengen) · [InfraFi](https://github.com/amd989/InfraFi)
+
+### Elsewhere on GitHub
+
+- [mariner3d/mariner](https://github.com/mariner3d/mariner) is a web interface for resin printers with ChiTu boards (Elegoo, Phrozen, Anycubic and others). Most of its commits over the last few months are mine, for mariner 2.
+- I'm also a member of [unofficial-unifi](https://github.com/unofficial-unifi), which installs the UniFi controller on pfSense and OPNsense, and of [flipperdevices](https://github.com/flipperdevices).
+
+### Latest from the blog
+
+I write up most of these projects on [The Maker Shed](https://blog.alejandro.md).
+
+<!-- BLOG-POST-LIST:START -->
+- [Widgets for OPNsense: My Router on the Windows Widget Board](https://blog.alejandro.md/2026/11/widgets-for-opnsense/)
+- [Readout: A Companion App for the EEVblog 121GW](https://blog.alejandro.md/2026/11/readout-a-companion-app-for-the-eevblog-121gw/)
+- [Elegoo Mars 3: 04 Remote Control with Mariner 2](https://blog.alejandro.md/2026/05/elegoo-mars-3-04-remote-control-with-mariner-2/)
+- [InfraFi: Sending WiFi Credentials Over Infrared with a Flipper Zero](https://blog.alejandro.md/2026/04/infrafi-sending-wifi-credentials-over-infrared-with-a-flipper-zero/)
+- [The Story Behind iTunesLyrics](https://blog.alejandro.md/2026/04/the-story-behind-ituneslyrics/)
+<!-- BLOG-POST-LIST:END -->
 
 ### What I use
 
